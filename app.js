@@ -1,12 +1,18 @@
 const express = require('express');
-const app = express(); // instancia do express
+const app = express();
 
-const rotaProdutos = require('./routes/produtos'); // define variavel c diretorio de rota
-const rotaPedidos = require('./routes/pedidos'); // define variavel c diretorio de rota
+const rotaProdutos = require('./routes/produtos'); 
+const rotaPedidos = require('./routes/pedidos');
 
 
-app.use('/produtos', rotaProdutos); // chama a rota produtos
-app.use('/pedidos', rotaPedidos); // chama a rota produtos
+app.use('/produtos', rotaProdutos);
+app.use('/pedidos', rotaPedidos);
 
-module.exports = app; // exporta app 
+app.use((req, res,next) => {
+    const erro = new Error('Não encontrado');
+    erro.status(404);
+    next(erro);
+});
+
+module.exports = app;
 
