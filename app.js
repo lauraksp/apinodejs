@@ -11,16 +11,15 @@ app.use(bodyparser.urlencoded({extended:false})); // apenas dados simples
 app.use(bodyparser.json()); // entrada no body somente json
 
 app.use((req, res, next) => {
-    res.header('Acces-Control-Allow-Origin', '*'); // liberado p acessar de qqr servidor 
+    res.header('Access-Control-Allow-Origin', '*'); // liberado p acessar de qqr servidor 
     res.header( // propriedades de cabeçalhos aceitos
-        'Acces-Control-Allow-Header',
+        'Access-Control-Allow-Header',
         'Origin, X-Requested-With, Content-Type, Accept, Authorization'        
     );
 
     if(req.method === 'OPTIONS') {
-        res.header('Acces-Control-Allow-Methods', 'GET, POST, PUTH, PATCH, DELETE');
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUTH, PATCH, DELETE');
         return res.status(200).send({});
-
     }
     next();
 });
